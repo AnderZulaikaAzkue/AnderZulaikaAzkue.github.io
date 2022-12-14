@@ -14,15 +14,16 @@ class Hunter1 {
       this.img = new Image()
       this.img.src = 'images/hitchcock hunter.avif'
 
-      this.bullets = []
-      
+      this.boomerangs = []
     }
+
     shoot() {
       const x = this.x + this.w
       const y = this.y + this.h / 2
-      const bullet = new Bullet(this.ctx, x, y)
-      this.bullets.push(bullet)
+      const boomerang = new Boomerang(this.ctx, x, y)
+      this.boomerangs.push(boomerang)
     }
+    
     draw() {
       this.ctx.drawImage(
         this.img,
@@ -30,8 +31,8 @@ class Hunter1 {
         this.y,
         this.w,
         this.h
-      )    
-      this.bullets.forEach(b => b.draw())
+      )       
+      this.boomerangs.forEach(b => b.draw())
     }
     move() {
       this.vx += this.ax
@@ -53,21 +54,22 @@ class Hunter1 {
         this.vx = 0
         this.x = this.ctx.canvas.width - this.w
       }
+      this.boomerangs.forEach(b => b.move())
     }
    
     onKeyDown(key) {
-        switch(key) {
-          case RIGHT:
-            this.vx = 3
-            break;
-          case LEFT:
-            this.vx = -3
-            break;
-          case SPACE:
-            this.shoot()
-            break;
-        }
+       switch(key) {
+        case RIGHT:
+           this.vx = 3
+           break;
+        case LEFT:
+           this.vx = -3
+           break;
+        case SPACE:
+           this.shoot()
+           break;
       }
+    }
     
       onKeyUp(key) {
         switch(key) {

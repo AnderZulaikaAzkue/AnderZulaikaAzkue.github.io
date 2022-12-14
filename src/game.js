@@ -3,7 +3,7 @@ class Game {
       this.ctx = ctx;
       this.intervalId = null;
       this.tick = 0
-      this.bacground = new Background(ctx)
+      this.background = new Background(ctx)
       this.hunter1 = new Hunter1(ctx) 
     }
     start() {
@@ -16,7 +16,7 @@ class Game {
     }
 
     draw() {
-      this.bacground.draw();
+      this.background.draw();
       this.hunter1.draw();
     }
 
