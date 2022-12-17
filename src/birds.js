@@ -2,11 +2,10 @@ class Birds {
   constructor( ctx, x, y) {
     this.ctx = ctx
     this.x = this.ctx.canvas.width
-    this.y = Math.floor(Math.random() * 200) + 20
+    this.y = Math.floor(Math.random() * 150) + 20
     this.w = 50
     this.h = 50
-    this.vx = -3
-
+    this.vx = -1.5
     this.img = new Image()
     this.img.src = "images/Bird 200px 50px.png"
     this.img.frames = 4
@@ -51,4 +50,6 @@ class Birds {
       this.x > 0 - this.ctx.canvas.width
     )
   }
+  
+
 }

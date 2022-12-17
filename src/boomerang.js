@@ -9,6 +9,7 @@ class Boomerang {
     this.vy = -7
     this.ax = 0
     this.ay = 0
+    
 
     this.image = new Image ()
     this.image.src = 'images/Boomerang 370px-35px.png'

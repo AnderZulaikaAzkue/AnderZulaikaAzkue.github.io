@@ -16,12 +16,15 @@ class Hunter1 {
     this.boomerangs = []
   }
 
-  shoot() {
+  
+  shoot() { 
     const x = this.x + this.w
     const y = this.y + this.h / 2
     const boomerang = new Boomerang(this.ctx, x, y)
+    const delay = 20;
+    const speed = 1;
     this.boomerangs.push(boomerang)
-  }
+    }
     
   draw() {
     this.ctx.drawImage(
