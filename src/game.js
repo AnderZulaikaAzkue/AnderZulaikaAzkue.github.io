@@ -35,7 +35,7 @@ class Game {
   stop() {
     clearInterval(this.interval)
   }
-
+ 
   draw() {
     this.background.draw();
     this.hunter1.draw();
@@ -57,7 +57,9 @@ class Game {
         const colX = boomerang.x < bird.x + bird.w && boomerang.x + boomerang.w > bird.x
         const colY = boomerang.y < bird.y + bird.h && boomerang.h + boomerang.y > bird.y
         if (colX && colY) {
-          this.gameOver()
+          this.birds.splice(this.birds.indexOf(bird), 1);
+
+        return true;
           }
       })
     })
@@ -74,18 +76,5 @@ class Game {
       }
   }
 
-  gameOver() {
-    clearInterval(this.intervalId)
 
-    this.ctx.font = "40px Comic Sans MS";
-    this.ctx.textAlign = "center";
-    this.ctx.fillText(
-      "GAME OVER",
-      this.ctx.canvas.width / 2,
-      this.ctx.canvas.height / 2
-    );
-  }
-  gameOver() {
-    this.stop()
-  }
 }

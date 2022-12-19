@@ -21,8 +21,6 @@ class Hunter1 {
     const x = this.x + this.w
     const y = this.y + this.h / 2
     const boomerang = new Boomerang(this.ctx, x, y)
-    const delay = 20;
-    const speed = 1;
     this.boomerangs.push(boomerang)
     }
     
@@ -41,6 +39,7 @@ class Hunter1 {
     this.vy += this.ay
     this.x += this.vx
     this.y += this.vy
+    this.boomerangs.forEach(b => b.move())
     
     if (this.y >= this.y0) {
         this.y = this.y0
@@ -55,8 +54,7 @@ class Hunter1 {
     if (this.x + this.w >= this.ctx.canvas.width) {
         this.vx = 0
         this.x = this.ctx.canvas.width - this.w
-      }
-      this.boomerangs.forEach(b => b.move())
+      }  
     }
    
   onKeyDown(key) {
