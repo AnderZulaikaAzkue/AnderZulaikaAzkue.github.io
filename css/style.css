@@ -1,7 +1,59 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: burlywood;
+}
+
+h1 {
+  font-size: 100px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+  color: #b393d3;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0px #957dad,
+               1px 2px 0px #957dad,
+               1px 3px 0px #957dad,
+               1px 4px 0px #957dad,
+               1px 5px 0px #957dad,
+               1px 6px 0px #957dad,
+               1px 10px 5px rgba(16, 16, 16, 0.5),
+               1px 15px 10px rgba(16, 16, 16, 0.4),
+               1px 20px 30px rgba(16, 16, 16, 0.3),
+               1px 25px 50px rgba(16, 16, 16, 0.2);
+}
+.wrapper {
+  display: flex;
+  margin: 15px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
 canvas {
-    border: 1px dotted;
+    border: 1px dotted burlywood ;
     margin: 0 auto;
     display: block;
   }
 
-
+  #start-btn {
+    width: 100px;
+    height: 50px;
+    position: relative;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    background-color: grey;
+    border-radius: 10%;
+  }

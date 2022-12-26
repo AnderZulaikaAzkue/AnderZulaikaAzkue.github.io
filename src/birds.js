@@ -1,8 +1,8 @@
 class Birds {
   constructor( ctx, x, y) {
     this.ctx = ctx
-    this.x = this.ctx.canvas.width
-    this.y = Math.floor(Math.random() * 150) + 20
+    this.x = x
+    this.y = y
     this.w = 50
     this.h = 50
     this.vx = -1.5
@@ -13,13 +13,11 @@ class Birds {
     this.img.src = "images/Bird 200px 50px.png"
     this.img.frames = 4
     this.img.frameIndex = 0
-    this.tick = 0
+    this.tick =  60 * 5
     this.animate()
-    this.setInterval = 0
-    this.knifes = []
+    this.knives = []
+    
   }
-
-
 
   draw() {
     this.ctx.drawImage(
@@ -34,18 +32,8 @@ class Birds {
     this.h
     )
     this.animate()
-    this.knifes.forEach(k => k.draw())
   }
-
-  addKnife() {
-    this.knifes--
-
-   if (this.knifes <=0) {
-    this.knifes = 75 + Math.random()
-    this.knifes.push(new Knife(this.ctx))
-   }
-  }
-
+  
   animate() {
     if (this.tick++ > 8) {
        this.tick = 0
@@ -62,7 +50,6 @@ class Birds {
     this.vy += this.ay
     this.x += this.vx
     this.y += this.vy
-    this.knifes.forEach(k => k.move())
   }
 
   isVisible() {
