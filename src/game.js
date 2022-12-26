@@ -15,6 +15,7 @@ class Game {
   }
 
   start() {
+    this.stop()
     this.initListeners()
     this.interval = setInterval(() =>{
     this.clear()
@@ -102,9 +103,14 @@ class Game {
         this.knives.splice(1)
         this.lifes -= 1
     }
+    if (this.lifes === 0){
+      this.gameOver()
+    }
   })
   }
-  
+  gameOver() {
+    this.stop()
+  }
 
   score(){
     this.ctx.font = '30px Luckiest Guy'
