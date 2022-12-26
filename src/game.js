@@ -20,6 +20,7 @@ class Game {
     this.clear()
     this.draw()
     this.checkCollisions()
+    this.checkCollisionsHunter1()
     this.move()
     this.addBirds()
     this.score()
@@ -89,6 +90,19 @@ class Game {
           }
       })
     })
+  }
+
+  checkCollisionsHunter1(){
+    const h = this.hunter1
+
+    this.knives.forEach(k => {
+      const colX = h.x < k.x + k.w && h.x + h.w > k.x
+      const colY = h.y < k.y + k.w && h.y + h.w > k.y
+      if (colX && colY) {
+        this.knives.splice(1)
+        this.lifes -= 1
+    }
+  })
   }
   
 
