@@ -10,7 +10,7 @@ class Birds {
     this.ax = 0
     this.ay = 0
     this.img = new Image()
-    this.img.src = "images/Bird 200px 50px.png"
+    this.img.src = "assets/images/Bird 200px 50px.png"
     this.img.frames = 4
     this.img.frameIndex = 0
     this.tick =  60 * 5

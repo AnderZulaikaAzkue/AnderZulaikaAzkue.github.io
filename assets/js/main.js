@@ -8,3 +8,4 @@ btn.onclick = () => {
   canvas.style.display = 'block'
   game.start()
 }
+

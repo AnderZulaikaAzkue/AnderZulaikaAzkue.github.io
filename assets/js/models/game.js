@@ -10,8 +10,6 @@ class Game {
     this.knives = []
     this.points = 0;
     this.lifes = 3
-    
-
   }
 
   start() {
@@ -33,9 +31,7 @@ class Game {
 
    setInterval(()=>{
     this.knives.push(
-      new Knife(this.ctx, this.x, this.y)
-      
-      
+      new Knife(this.ctx, this.x, this.y)  
     )
      this.birds.push(new Birds(this.ctx, this.x, this.y))
    },1000 ) 
@@ -47,14 +43,13 @@ class Game {
 
   addBirds() {
     this.tick--
-
    if (this.tick <=0) {
     this.tick = 75 + Math.random()
-   
    }
   }
   stop() {
     clearInterval(this.interval)
+   
   }
  
   draw() {
@@ -70,7 +65,6 @@ class Game {
     this.knives.forEach(k => k.move())
   }
 
-  
   fall(){
     this.knives.forEach(k => k.fall())
     
@@ -108,8 +102,19 @@ class Game {
     }
   })
   }
+
   gameOver() {
+    clearInterval(this.interval)
     this.stop()
+    this.ctx.font = "40px Comic Sans MS";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText(
+      `GAME OVER
+       Score: ${this.points}`,
+      this.ctx.canvas.width / 2,
+      this.ctx.canvas.height / 2
+    );
+    
   }
 
   score(){

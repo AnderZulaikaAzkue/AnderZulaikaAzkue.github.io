@@ -11,7 +11,7 @@ class Hunter1 {
     this.ay = 0
   
     this.img = new Image()
-    this.img.src = 'images/hitchcock hunter.avif'
+    this.img.src = 'assets/images/hitchcock hunter.avif'
 
     this.boomerangs = []
   }

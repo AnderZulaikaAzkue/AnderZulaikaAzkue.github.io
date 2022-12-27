@@ -13,7 +13,7 @@ class Boomerang {
     
 
     this.image = new Image ()
-    this.image.src = 'images/Boomerang 370px-35px.png'
+    this.image.src = 'assets/images/Boomerang 370px-35px.png'
     this.image.frames = 16
     this.image.frameIndex = 0
     this.tick = 0

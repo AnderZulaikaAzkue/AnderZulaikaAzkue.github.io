@@ -10,7 +10,7 @@ class Knife {
     this.ax = 0
     this.ay = 0
     this.img = new Image()
-    this.img.src = 'images/flat knife .png'
+    this.img.src = 'assets/images/flat knife .png'
 }     
 
 
