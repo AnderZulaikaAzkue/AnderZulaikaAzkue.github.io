@@ -12,7 +12,7 @@ class Game {
     this.knives2 = []
     this.points = 0;
     this.lifes = 3
-    this.level = 2
+    this.level = 1
 
     this.killTheBirdSound = new Audio("assets/sounds/killTheBird.wav")
     this.killTheBirdSound.volume = 0.5
@@ -27,11 +27,13 @@ class Game {
     this.checkCollisions()
     this.checkCollisionsBirds2()
     this.checkCollisionsHunter1()
+    this.checkCollisionsHunter1Knife2()
     this.move()
     this.addBirds()
     this.addBirds2()
     this.score()
     this.showLifes()
+    this.checkLevelChange()
     this.fall()
     this.x = this.ctx.canvas.width
     this.y = Math.floor(Math.random() * 150) + 20
@@ -44,12 +46,14 @@ class Game {
      this.birds.push(new Birds(this.ctx, this.x, this.y))
    },1000 ) 
 
-   setInterval(()=>{
+   setInterval(()=> {
+    if(this.points > 3){  
     this.knives2.push(
       new Knife2(this.ctx, this.x, this.y)  
     )
      this.birds2.push(new Birds2(this.ctx, this.x, this.y))
-   },1000 ) 
+   }},1000 ) 
+  
   }  
 
   clearBirds() {
@@ -67,10 +71,24 @@ class Game {
   }
 
   addBirds2() {
+    if(this.points > 3){     
     this.tick--
    if (this.tick <= 0) {
     this.tick = 75 + Math.random()
    }
+  }
+  }
+
+  checkLevelChange(){
+    if (this.points < 3){
+    this.level = 1
+    }else {
+      this.level = 2
+    }
+    this.ctx.font = '30px luckiest Guy'
+    this.ctx.fillStyle = "black"
+    this.ctx.fillText(`Level: ${this.level}`, 350, 20)
+  
   }
 
   stop() {
@@ -141,11 +159,29 @@ class Game {
         this.knives.splice(1)
         this.lifes -= 1
     }
+    
     if (this.lifes === 0){
       this.gameOver()
     }
   })
   }
+  checkCollisionsHunter1Knife2(){
+    const h = this.hunter1
+
+    this.knives2.forEach(k => {
+      const colX = h.x < k.x + k.w && h.x + h.w > k.x
+      const colY = h.y < k.y + k.w && h.y + h.w > k.y
+      if (colX && colY) {
+        this.knives2.splice(1)
+        this.lifes -= 1
+    }
+    
+    if (this.lifes === 0){
+      this.gameOver()
+    }
+  })
+  }
+
 
   gameOver() {
     clearInterval(this.interval)
