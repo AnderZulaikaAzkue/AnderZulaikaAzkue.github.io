@@ -87,7 +87,7 @@ class Game {
     }
     this.ctx.font = '30px luckiest Guy'
     this.ctx.fillStyle = "black"
-    this.ctx.fillText(`Level: ${this.level}`, 350, 20)
+    this.ctx.fillText(`Level: ${this.level}`, 450, 20)
   
   }
 
@@ -187,11 +187,12 @@ class Game {
     clearInterval(this.interval)
     this.stop()
     this.img = new Image();
-    this.img.src = 'assets/images/alfred-hitchcock-birds-3.jpg'
+    this.img.src = 'assets/images/mainbackground.jpg'
 
     this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
-    this.ctx.font = "40px Comic Sans MS";
+    this.ctx.font = "80px 'Roboto';";
     this.ctx.textAlign = "center";
+    
     this.ctx.fillText(
       `GAME OVER
        Score: ${this.points}`,
@@ -202,15 +203,15 @@ class Game {
   }
 
   score(){
-    this.ctx.font = '30px Luckiest Guy'
+    this.ctx.font = '30px Roboto'
     this.ctx.fillStyle = "black"
     this.ctx.fillText(`Score: ${this.points}`, 20, 20)
   }
 
   showLifes(){
-    this.ctx.font = '30px luckiest Guy'
+    this.ctx.font = '30px Roboto'
     this.ctx.fillStyle = "black"
-    this.ctx.fillText(`Lives: ${this.lifes}`, 680, 20)
+    this.ctx.fillText(`Lives: ${this.lifes}`, 880, 20)
   }
 
   initListeners() {

@@ -10,7 +10,7 @@ class Knife2 {
       this.ax = 0
       this.ay = 0
       this.img = new Image()
-      this.img.src = 'assets/images/flat knife .png'
+      this.img.src = 'assets/images/Bird 50px 50px.png'
   }     
   
   draw() {
