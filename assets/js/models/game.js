@@ -16,6 +16,20 @@ class Game {
 
     this.killTheBirdSound = new Audio("assets/sounds/killTheBird.wav")
     this.killTheBirdSound.volume = 0.5
+
+    this.killTheBird2Sound = new Audio("assets/sounds/bird2.wav")
+    this.killTheBird2Sound.volume = 0.5
+
+    this.levelChangeSound = new Audio("assets/sounds/levelChange.wav")
+    this.levelChangeSound.volume = 0.5
+
+    this.gameOverSound = new Audio("assets/sounds/gameOver.wav")
+    this.gameOverSound.volume = 0.5
+
+    this.lifeDeadSound = new Audio("assets/sounds/lifeDead.wav")
+    this.lifeDeadSound.volume = 0.5
+
+
   }
 
   start() {
@@ -38,6 +52,7 @@ class Game {
     this.x = this.ctx.canvas.width
     this.y = Math.floor(Math.random() * 150) + 20
      }, 1000 / 60) 
+     
 
    setInterval(()=>{
     this.knives.push(
@@ -53,9 +68,8 @@ class Game {
     )
      this.birds2.push(new Birds2(this.ctx, this.x, this.y))
    }},1000 ) 
-  
   }  
-
+ 
   clearBirds() {
     this.birds = this.birds.filter(b => b.isVisible())
   }
@@ -84,6 +98,8 @@ class Game {
     this.level = 1
     }else {
       this.level = 2
+      this.levelChangeSound.play()
+      this.levelChangeSound.pause()
     }
     this.ctx.font = '30px luckiest Guy'
     this.ctx.fillStyle = "black"
@@ -143,7 +159,7 @@ class Game {
         if (colX && colY) {
           this.birds2.splice(this.birds2.indexOf(bird2), 1);
           this.points++;
-          this.killTheBirdSound.play()
+          this.killTheBird2Sound.play()
           return true;
           }
       })
@@ -158,13 +174,14 @@ class Game {
       if (colX && colY) {
         this.knives.splice(1)
         this.lifes -= 1
+        this.lifeDeadSound.play()
     }
-    
     if (this.lifes === 0){
       this.gameOver()
     }
   })
   }
+
   checkCollisionsHunter1Knife2(){
     const h = this.hunter1
 
@@ -174,6 +191,7 @@ class Game {
       if (colX && colY) {
         this.knives2.splice(1)
         this.lifes -= 1
+        this.lifeDeadSound.play()
     }
     
     if (this.lifes === 0){
@@ -190,7 +208,7 @@ class Game {
     this.img.src = 'assets/images/mainbackground.jpg'
 
     this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
-    this.ctx.font = "80px 'Roboto';";
+    this.ctx.font = "120px 'Roboto';";
     this.ctx.textAlign = "center";
     
     this.ctx.fillText(
@@ -199,7 +217,7 @@ class Game {
       this.ctx.canvas.width / 2,
       this.ctx.canvas.height / 2
     );
-    
+    this.gameOverSound.play() 
   }
 
   score(){
