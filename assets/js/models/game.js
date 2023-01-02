@@ -213,6 +213,7 @@ class Game {
     
     this.ctx.fillText(
       `GAME OVER
+       Level: ${this.level},
        Score: ${this.points}`,
       this.ctx.canvas.width / 2,
       this.ctx.canvas.height / 2
