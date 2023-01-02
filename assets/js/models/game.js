@@ -29,8 +29,6 @@ class Game {
 
     this.lifeDeadSound = new Audio("assets/sounds/lifeDead.wav")
     this.lifeDeadSound.volume = 0.5
-
-
   }
 
   start() {
@@ -43,6 +41,7 @@ class Game {
     this.checkCollisionsBirds2()
     this.checkCollisionsHunter1()
     this.checkCollisionsHunter1Knife2()
+    this.checkCollisionsHunter1BirdsDeath()
     this.move()
     this.addBirds()
     this.addBirds2()
@@ -71,11 +70,11 @@ class Game {
      this.birds2.push(new Birds2(this.ctx, this.x, this.y))
    }},1000 ) 
 
-   setInterval(()=>{
+   setInterval(()=> {
+    if(this.points > 6){  
     this.birdsDeath.push(new BirdsDeath(this.ctx, this.x, this.y))
-  },1000 ) 
- 
-  }  
+  }},1000 ) 
+}
  
   clearBirds() {
     this.birds = this.birds.filter(b => b.isVisible())
@@ -92,7 +91,7 @@ class Game {
   }
 
   addBirds2() {
-    if(this.points > 3){     
+    if(this.points > 3) {     
     this.tick--
    if (this.tick <= 0) {
     this.tick = 75 + Math.random()
@@ -101,17 +100,24 @@ class Game {
   }
 
   addBirdsDeath() {
+    if(this.points > 6) {
     this.tick--
    if (this.tick <= 0) {
     this.tick = 75 + Math.random()
    }
   }
+}
 
   checkLevelChange(){
     if (this.points < 3){
     this.level = 1
     }else {
       this.level = 2
+      this.levelChangeSound.play()
+      this.levelChangeSound.pause()
+    }
+    if (this.points > 6) {
+      this.level = 3
       this.levelChangeSound.play()
       this.levelChangeSound.pause()
     }
@@ -207,6 +213,24 @@ class Game {
       const colY = h.y < k.y + k.w && h.y + h.w > k.y
       if (colX && colY) {
         this.knives2.splice(this.knives2.indexOf(k), 1)
+        this.lifes -= 1
+        this.lifeDeadSound.play()
+    }
+    
+    if (this.lifes === 0){
+      this.gameOver()
+    }
+  })
+  }
+
+  checkCollisionsHunter1BirdsDeath(){
+    const h = this.hunter1
+
+    this.birdsDeath.forEach(k => {
+      const colX = h.x < k.x + k.w && h.x + h.w > k.x
+      const colY = h.y < k.y + k.w && h.y + h.w > k.y
+      if (colX && colY) {
+        this.birdsDeath.splice(this.birdsDeath.indexOf(k), 1)
         this.lifes -= 1
         this.lifeDeadSound.play()
     }
