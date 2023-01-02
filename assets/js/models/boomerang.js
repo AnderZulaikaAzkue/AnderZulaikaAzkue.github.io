@@ -10,8 +10,6 @@ class Boomerang {
     this.ax = 0
     this.ay = 0
     
-    
-
     this.image = new Image ()
     this.image.src = 'assets/images/Boomerang 370px-35px.png'
     this.image.frames = 16

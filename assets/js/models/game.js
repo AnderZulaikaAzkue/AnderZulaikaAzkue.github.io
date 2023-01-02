@@ -10,6 +10,7 @@ class Game {
     this.boomerangs = []
     this.knives = []
     this.knives2 = []
+    this.birdsDeath = [] 
     this.points = 0;
     this.lifes = 3
     this.level = 1
@@ -45,6 +46,7 @@ class Game {
     this.move()
     this.addBirds()
     this.addBirds2()
+    this.addBirdsDeath()
     this.score()
     this.showLifes()
     this.checkLevelChange()
@@ -68,6 +70,11 @@ class Game {
     )
      this.birds2.push(new Birds2(this.ctx, this.x, this.y))
    }},1000 ) 
+
+   setInterval(()=>{
+    this.birdsDeath.push(new BirdsDeath(this.ctx, this.x, this.y))
+  },1000 ) 
+ 
   }  
  
   clearBirds() {
@@ -91,6 +98,13 @@ class Game {
     this.tick = 75 + Math.random()
    }
   }
+  }
+
+  addBirdsDeath() {
+    this.tick--
+   if (this.tick <= 0) {
+    this.tick = 75 + Math.random()
+   }
   }
 
   checkLevelChange(){
@@ -118,6 +132,8 @@ class Game {
     this.birds2.forEach(b2 => b2.draw())
     this.knives.forEach(k => k.draw())
     this.knives2.forEach(k2 => k2.draw())
+    this.birdsDeath.forEach(bd => bd.draw())
+    
   }
 
   move() {
@@ -126,6 +142,7 @@ class Game {
     this.birds2.forEach(b2 => b2.move())
     this.knives.forEach(k => k.move())
     this.knives2.forEach(k2 => k2.move())
+    this.birdsDeath.forEach(bd => bd.move())
   }
 
   fall(){
