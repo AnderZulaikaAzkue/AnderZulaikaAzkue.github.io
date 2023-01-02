@@ -36,4 +36,10 @@ draw() {
 
      },Math.floor(Math.random() * 1000000))  
   }
+  isVisible() {
+    return (
+      this.y < this.ctx.canvas.height &&
+      this.y > 0 - (this.ctx.canvas.height)
+      )
+    }
 }

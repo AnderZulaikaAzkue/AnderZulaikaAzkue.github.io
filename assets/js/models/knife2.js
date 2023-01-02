@@ -36,4 +36,10 @@ class Knife2 {
   
        },Math.floor(Math.random() * 50000))  
     }
+    isVisible() {
+      return (
+        this.y < this.ctx.canvas.height &&
+        this.y > 0 - (this.ctx.canvas.height)
+        )
+      }
   }

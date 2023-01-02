@@ -172,7 +172,7 @@ class Game {
       const colX = h.x < k.x + k.w && h.x + h.w > k.x
       const colY = h.y < k.y + k.w && h.y + h.w > k.y
       if (colX && colY) {
-        this.knives.splice(1)
+        this.knives.splice(this.knives.indexOf(k), 1)
         this.lifes -= 1
         this.lifeDeadSound.play()
     }
@@ -189,7 +189,7 @@ class Game {
       const colX = h.x < k.x + k.w && h.x + h.w > k.x
       const colY = h.y < k.y + k.w && h.y + h.w > k.y
       if (colX && colY) {
-        this.knives2.splice(1)
+        this.knives2.splice(this.knives2.indexOf(k), 1)
         this.lifes -= 1
         this.lifeDeadSound.play()
     }

@@ -50,4 +50,10 @@ class Birds2 {
       this.x += this.vx
       this.y += this.vy
     } 
+    isVisible() {
+      return (
+        this.x < this.ctx.canvas.width * 2 &&
+        this.x > 0 - this.ctx.canvas.width
+      )
+    }
   }
