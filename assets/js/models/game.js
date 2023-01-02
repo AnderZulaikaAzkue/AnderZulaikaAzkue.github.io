@@ -50,11 +50,11 @@ class Game {
     this.showLifes()
     this.checkLevelChange()
     this.fall()
+    this.win()
     this.x = this.ctx.canvas.width
     this.y = Math.floor(Math.random() * 150) + 20
      }, 1000 / 60) 
      
-
    setInterval(()=>{
     this.knives.push(
       new Knife(this.ctx, this.x, this.y)  
@@ -79,6 +79,7 @@ class Game {
   clearBirds() {
     this.birds = this.birds.filter(b => b.isVisible())
   }
+
   clearBirds2() {
     this.birds2 = this.birds2.filter(b2 => b2.isVisible())
   }
@@ -109,7 +110,7 @@ class Game {
 }
 
   checkLevelChange(){
-    if (this.points < 3){
+    if (this.points < 3) {
     this.level = 1
     }else {
       this.level = 2
@@ -138,8 +139,7 @@ class Game {
     this.birds2.forEach(b2 => b2.draw())
     this.knives.forEach(k => k.draw())
     this.knives2.forEach(k2 => k2.draw())
-    this.birdsDeath.forEach(bd => bd.draw())
-    
+    this.birdsDeath.forEach(bd => bd.draw()) 
   }
 
   move() {
@@ -174,6 +174,7 @@ class Game {
       })
     })
   }
+
   checkCollisionsBirds2() {
     this.hunter1.boomerangs.forEach(boomerang => {
       this.birds2.some(bird2 => {
@@ -188,6 +189,7 @@ class Game {
       })
     })
   }
+
   checkCollisionsHunter1(){
     const h = this.hunter1
 
@@ -241,7 +243,6 @@ class Game {
   })
   }
 
-
   gameOver() {
     clearInterval(this.interval)
     this.stop()
@@ -254,12 +255,35 @@ class Game {
     
     this.ctx.fillText(
       `GAME OVER
-       Level: ${this.level},
+       Level: ${this.level}
        Score: ${this.points}`,
       this.ctx.canvas.width / 2,
       this.ctx.canvas.height / 2
     );
+    this.lifeDeadSound.pause()
     this.gameOverSound.play() 
+  }
+
+  win () {
+    if (this.points > 10) {
+      clearInterval(this.interval)
+      this.stop()
+      this.img = new Image();
+      this.img.src = 'assets/images/mainbackground.jpg'
+  
+      this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+      this.ctx.font = "120px 'Roboto';";
+      this.ctx.textAlign = "center";
+      
+      this.ctx.fillText(
+        `YOU WIN!
+         Level: ${this.level}
+         Score: ${this.points}`,
+        this.ctx.canvas.width / 2,
+        this.ctx.canvas.height / 2
+      );
+
+    }
   }
 
   score(){

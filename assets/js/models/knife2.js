@@ -4,13 +4,13 @@ class Knife2 {
       this.x = x
       this.y = y
       this.w = 20
-      this.h = 50
+      this.h = 70
       this.vx = -4
       this.vy = 0
       this.ax = 0
       this.ay = 0
       this.img = new Image()
-      this.img.src = 'assets/images/Bird 50px 50px.png'
+      this.img.src = 'assets/images/knife2.png'
   }     
   
   draw() {
