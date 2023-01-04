@@ -9,7 +9,7 @@ class Background {
     this.vy = 0
     this.img = new Image()
     this.img.src = 'assets/images/mainbackground.jpg'
-    }
+  }
 
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
@@ -17,6 +17,6 @@ class Background {
 
   move() {
     this.x += this.vx
-    this.y += this.vy  
-  }    
+    this.y += this.vy
+  }
 }

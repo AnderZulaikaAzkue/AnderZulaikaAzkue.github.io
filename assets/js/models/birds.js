@@ -1,5 +1,5 @@
 class Birds {
-  constructor( ctx, x, y) {
+  constructor(ctx, x, y) {
     this.ctx = ctx
     this.x = x
     this.y = y
@@ -13,34 +13,33 @@ class Birds {
     this.img.src = "assets/images/Bird 200px 50px.png"
     this.img.frames = 4
     this.img.frameIndex = 0
-    this.tick =  60 * 5
+    this.tick = 60 * 5
     this.animate()
     this.knives = []
-    
   }
 
   draw() {
     this.ctx.drawImage(
-    this.img,
-    this.img.frameIndex * this.img.width / this.img.frames,
-    0,
-    this.img.width / this.img.frames,
-    this.img.height,
-    this.x,
-    this.y,
-    this.w,
-    this.h
+      this.img,
+      this.img.frameIndex * this.img.width / this.img.frames,
+      0,
+      this.img.width / this.img.frames,
+      this.img.height,
+      this.x,
+      this.y,
+      this.w,
+      this.h
     )
     this.animate()
   }
-  
+
   animate() {
     if (this.tick++ > 8) {
-       this.tick = 0
-       this.img.frameIndex++
+      this.tick = 0
+      this.img.frameIndex++
 
-    if (this.img.frameIndex > this.img.frames - 1) {
-       this.img.frameIndex = 0
+      if (this.img.frameIndex > this.img.frames - 1) {
+        this.img.frameIndex = 0
       }
     }
   }
@@ -58,5 +57,4 @@ class Birds {
       this.x > 0 - this.ctx.canvas.width
     )
   }
-   
 }

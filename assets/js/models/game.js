@@ -4,13 +4,13 @@ class Game {
     this.interval = null;
     this.tick = 60 * 5
     this.background = new Background(ctx)
-    this.hunter1 = new Hunter1(ctx) 
+    this.hunter1 = new Hunter1(ctx)
     this.birds = []
     this.birds2 = []
     this.boomerangs = []
     this.knives = []
     this.knives2 = []
-    this.birdsDeath = [] 
+    this.birdsDeath = []
     this.points = 0;
     this.lifes = 3
     this.level = 1
@@ -34,48 +34,50 @@ class Game {
   start() {
     this.stop()
     this.initListeners()
-    this.interval = setInterval(() =>{
-    this.clear()
-    this.draw()
-    this.checkCollisions()
-    this.checkCollisionsBirds2()
-    this.checkCollisionsHunter1()
-    this.checkCollisionsHunter1Knife2()
-    this.checkCollisionsHunter1BirdsDeath()
-    this.move()
-    this.addBirds()
-    this.addBirds2()
-    this.addBirdsDeath()
-    this.score()
-    this.showLifes()
-    this.checkLevelChange()
-    this.fall()
-    this.win()
-    this.x = this.ctx.canvas.width
-    this.y = Math.floor(Math.random() * 150) + 20
-     }, 1000 / 60) 
-     
-   setInterval(()=>{
-    this.knives.push(
-      new Knife(this.ctx, this.x, this.y)  
-    )
-     this.birds.push(new Birds(this.ctx, this.x, this.y))
-   },1000 ) 
+    this.interval = setInterval(() => {
+      this.clear()
+      this.draw()
+      this.checkCollisions()
+      this.checkCollisionsBirds2()
+      this.checkCollisionsHunter1()
+      this.checkCollisionsHunter1Knife2()
+      this.checkCollisionsHunter1BirdsDeath()
+      this.move()
+      this.addBirds()
+      this.addBirds2()
+      this.addBirdsDeath()
+      this.score()
+      this.showLifes()
+      this.checkLevelChange()
+      this.fall()
+      this.win()
+      this.x = this.ctx.canvas.width
+      this.y = Math.floor(Math.random() * 150) + 20
+    }, 1000 / 60)
 
-   setInterval(()=> {
-    if(this.points > 3){  
-    this.knives2.push(
-      new Knife2(this.ctx, this.x, this.y)  
-    )
-     this.birds2.push(new Birds2(this.ctx, this.x, this.y))
-   }},1000 ) 
+    setInterval(() => {
+      this.knives.push(
+        new Knife(this.ctx, this.x, this.y)
+      )
+      this.birds.push(new Birds(this.ctx, this.x, this.y))
+    }, 1000)
 
-   setInterval(()=> {
-    if(this.points > 6){  
-    this.birdsDeath.push(new BirdsDeath(this.ctx, this.x, this.y))
-  }},1000 ) 
-}
- 
+    setInterval(() => {
+      if (this.points > 3) {
+        this.knives2.push(
+          new Knife2(this.ctx, this.x, this.y)
+        )
+        this.birds2.push(new Birds2(this.ctx, this.x, this.y))
+      }
+    }, 1000)
+
+    setInterval(() => {
+      if (this.points > 6) {
+        this.birdsDeath.push(new BirdsDeath(this.ctx, this.x, this.y))
+      }
+    }, 1000)
+  }
+
   clearBirds() {
     this.birds = this.birds.filter(b => b.isVisible())
   }
@@ -86,33 +88,33 @@ class Game {
 
   addBirds() {
     this.tick--
-   if (this.tick <= 0) {
-    this.tick = 75 + Math.random()
-   }
+    if (this.tick <= 0) {
+      this.tick = 75 + Math.random()
+    }
   }
 
   addBirds2() {
-    if(this.points > 3) {     
-    this.tick--
-   if (this.tick <= 0) {
-    this.tick = 75 + Math.random()
-   }
-  }
+    if (this.points > 3) {
+      this.tick--
+      if (this.tick <= 0) {
+        this.tick = 75 + Math.random()
+      }
+    }
   }
 
   addBirdsDeath() {
-    if(this.points > 6) {
-    this.tick--
-   if (this.tick <= 0) {
-    this.tick = 75 + Math.random()
-   }
+    if (this.points > 6) {
+      this.tick--
+      if (this.tick <= 0) {
+        this.tick = 75 + Math.random()
+      }
+    }
   }
-}
 
-  checkLevelChange(){
+  checkLevelChange() {
     if (this.points < 3) {
-    this.level = 1
-    }else {
+      this.level = 1
+    } else {
       this.level = 2
       this.levelChangeSound.play()
       this.levelChangeSound.pause()
@@ -125,13 +127,12 @@ class Game {
     this.ctx.font = '30px luckiest Guy'
     this.ctx.fillStyle = "black"
     this.ctx.fillText(`Level: ${this.level}`, 450, 20)
-  
   }
 
   stop() {
-    clearInterval(this.interval) 
+    clearInterval(this.interval)
   }
- 
+
   draw() {
     this.background.draw();
     this.hunter1.draw();
@@ -139,7 +140,7 @@ class Game {
     this.birds2.forEach(b2 => b2.draw())
     this.knives.forEach(k => k.draw())
     this.knives2.forEach(k2 => k2.draw())
-    this.birdsDeath.forEach(bd => bd.draw()) 
+    this.birdsDeath.forEach(bd => bd.draw())
   }
 
   move() {
@@ -151,15 +152,15 @@ class Game {
     this.birdsDeath.forEach(bd => bd.move())
   }
 
-  fall(){
+  fall() {
     this.knives.forEach(k => k.fall())
     this.knives2.forEach(k2 => k2.fall())
-    
   }
-  clear(){
+
+  clear() {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
   }
- 
+
   checkCollisions() {
     this.hunter1.boomerangs.forEach(boomerang => {
       this.birds.some(bird => {
@@ -167,10 +168,11 @@ class Game {
         const colY = boomerang.y < bird.y + bird.h && boomerang.h + boomerang.y > bird.y
         if (colX && colY) {
           this.birds.splice(this.birds.indexOf(bird), 1);
+          //this.knife.splice(this.knives.indexOf(knife), 1);
           this.points++;
-          this.killTheBirdSound.play()
+          this.killTheBirdSound.play();
           return true;
-          }
+        }
       })
     })
   }
@@ -185,12 +187,12 @@ class Game {
           this.points++;
           this.killTheBird2Sound.play()
           return true;
-          }
+        }
       })
     })
   }
 
-  checkCollisionsHunter1(){
+  checkCollisionsHunter1() {
     const h = this.hunter1
 
     this.knives.forEach(k => {
@@ -200,14 +202,14 @@ class Game {
         this.knives.splice(this.knives.indexOf(k), 1)
         this.lifes -= 1
         this.lifeDeadSound.play()
-    }
-    if (this.lifes === 0){
-      this.gameOver()
-    }
-  })
+      }
+      if (this.lifes === 0) {
+        this.gameOver()
+      }
+    })
   }
 
-  checkCollisionsHunter1Knife2(){
+  checkCollisionsHunter1Knife2() {
     const h = this.hunter1
 
     this.knives2.forEach(k => {
@@ -217,15 +219,14 @@ class Game {
         this.knives2.splice(this.knives2.indexOf(k), 1)
         this.lifes -= 1
         this.lifeDeadSound.play()
-    }
-    
-    if (this.lifes === 0){
-      this.gameOver()
-    }
-  })
+      }
+      if (this.lifes === 0) {
+        this.gameOver()
+      }
+    })
   }
 
-  checkCollisionsHunter1BirdsDeath(){
+  checkCollisionsHunter1BirdsDeath() {
     const h = this.hunter1
 
     this.birdsDeath.forEach(k => {
@@ -235,12 +236,11 @@ class Game {
         this.birdsDeath.splice(this.birdsDeath.indexOf(k), 1)
         this.lifes -= 1
         this.lifeDeadSound.play()
-    }
-    
-    if (this.lifes === 0){
-      this.gameOver()
-    }
-  })
+      }
+      if (this.lifes === 0) {
+        this.gameOver()
+      }
+    })
   }
 
   gameOver() {
@@ -252,7 +252,6 @@ class Game {
     this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
     this.ctx.font = "120px 'Roboto';";
     this.ctx.textAlign = "center";
-    
     this.ctx.fillText(
       `GAME OVER
        Level: ${this.level}
@@ -261,20 +260,19 @@ class Game {
       this.ctx.canvas.height / 2
     );
     this.lifeDeadSound.pause()
-    this.gameOverSound.play() 
+    this.gameOverSound.play()
   }
 
-  win () {
+  win() {
     if (this.points > 10) {
       clearInterval(this.interval)
       this.stop()
       this.img = new Image();
       this.img.src = 'assets/images/mainbackground.jpg'
-  
+
       this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
       this.ctx.font = "120px 'Roboto';";
       this.ctx.textAlign = "center";
-      
       this.ctx.fillText(
         `YOU WIN!
          Level: ${this.level}
@@ -282,17 +280,16 @@ class Game {
         this.ctx.canvas.width / 2,
         this.ctx.canvas.height / 2
       );
-
     }
   }
 
-  score(){
+  score() {
     this.ctx.font = '30px Roboto'
     this.ctx.fillStyle = "black"
     this.ctx.fillText(`Score: ${this.points}`, 20, 20)
   }
 
-  showLifes(){
+  showLifes() {
     this.ctx.font = '30px Roboto'
     this.ctx.fillStyle = "black"
     this.ctx.fillText(`Lives: ${this.lifes}`, 880, 20)
@@ -301,10 +298,10 @@ class Game {
   initListeners() {
     document.onkeydown = (e) => {
       this.hunter1.onKeyDown(e.keyCode)
-      }
-  
+    }
+
     document.onkeyup = (e) => {
       this.hunter1.onKeyUp(e.keyCode)
-      }
+    }
   }
 }

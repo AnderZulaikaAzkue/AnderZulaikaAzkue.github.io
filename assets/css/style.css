@@ -78,6 +78,7 @@ background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 10
   outline: none;
   position: relative;
   padding: 10px;
+  margin-top: 100px;
   }
 
 button::before {
