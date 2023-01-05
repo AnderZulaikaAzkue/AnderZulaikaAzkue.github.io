@@ -34,7 +34,7 @@ class Knife2 {
       this.vx = 0
       this.vy = 2
 
-    }, Math.floor(Math.random() * 50000))
+    }, Math.floor(Math.random() * 75000))
   }
   isVisible() {
     return (

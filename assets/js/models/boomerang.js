@@ -35,7 +35,7 @@ class Boomerang {
   }
 
   animate() {
-    if (this.tick++ > 0.7) {
+    if (this.tick++ > 1) {
       this.tick = 0
       this.image.frameIndex++
 

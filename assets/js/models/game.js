@@ -15,6 +15,9 @@ class Game {
     this.lifes = 3
     this.level = 1
 
+    this.startMusic = new Audio('assets/sounds/forest birds.wav')
+    this.startMusic.volume = 0.5
+
     this.killTheBirdSound = new Audio("assets/sounds/killTheBird.wav")
     this.killTheBirdSound.volume = 0.5
 
@@ -27,7 +30,7 @@ class Game {
     this.gameOverSound = new Audio("assets/sounds/gameOver.wav")
     this.gameOverSound.volume = 0.5
 
-    this.lifeDeadSound = new Audio("assets/sounds/lifeDead.wav")
+    this.lifeDeadSound = new Audio("assets/sounds/dfs.wav")
     this.lifeDeadSound.volume = 0.5
   }
 
@@ -51,6 +54,7 @@ class Game {
       this.checkLevelChange()
       this.fall()
       this.win()
+      this.startMusic.play()
       this.x = this.ctx.canvas.width
       this.y = Math.floor(Math.random() * 150) + 20
     }, 1000 / 60)
@@ -116,11 +120,13 @@ class Game {
       this.level = 1
     } else {
       this.level = 2
+      this.levelChangeSound.loop = false
       this.levelChangeSound.play()
       this.levelChangeSound.pause()
     }
     if (this.points > 6) {
       this.level = 3
+      this.levelChangeSound.loop = false
       this.levelChangeSound.play()
       this.levelChangeSound.pause()
     }
@@ -246,11 +252,11 @@ class Game {
   gameOver() {
     clearInterval(this.interval)
     this.stop()
+    this.startMusic.pause()
     this.img = new Image();
     this.img.src = 'assets/images/mainbackground.jpg'
-
     this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
-    this.ctx.font = "120px 'Roboto';";
+    this.ctx.font = "60px 'Roboto';";
     this.ctx.textAlign = "center";
     this.ctx.fillText(
       `GAME OVER
@@ -264,7 +270,7 @@ class Game {
   }
 
   win() {
-    if (this.points > 10) {
+    if (this.points > 50) {
       clearInterval(this.interval)
       this.stop()
       this.img = new Image();

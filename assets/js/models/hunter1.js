@@ -3,8 +3,8 @@ class Hunter1 {
     this.ctx = ctx
     this.x = 500
     this.y = 300
-    this.w = 40
-    this.h = 100
+    this.w = 60
+    this.h = 150
     this.vx = 0
     this.vy = 0
     this.ax = 0
@@ -14,14 +14,17 @@ class Hunter1 {
     this.img.src = 'assets/images/hitchcock hunter.avif'
 
     this.boomerangs = []
-  }
 
+    this.shootSound = new Audio("assets/sounds/boomerang.mp3")
+    this.shootSound.volume = 0.5
+  }
 
   shoot() {
     const x = this.x + this.w
     const y = this.y + this.h / 2
     const boomerang = new Boomerang(this.ctx, x, y)
     this.boomerangs.push(boomerang)
+    
   }
 
   draw() {
@@ -67,6 +70,7 @@ class Hunter1 {
         break;
       case SPACE:
         this.shoot()
+        this.shootSound.play()
         break;
     }
   }

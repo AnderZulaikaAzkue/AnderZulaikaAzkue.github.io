@@ -7,5 +7,6 @@ btn.onclick = () => {
   welcome.remove()
   canvas.style.display = 'block'
   game.start()
+
 }
 
