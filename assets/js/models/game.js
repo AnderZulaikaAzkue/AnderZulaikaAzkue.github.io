@@ -61,8 +61,7 @@ class Game {
 
     setInterval(() => {
       this.knives.push(
-        new Knife(this.ctx, this.x, this.y)
-      )
+        new Knife(this.ctx, this.x, this.y))
       this.birds.push(new Birds(this.ctx, this.x, this.y))
     }, 1000)
 
@@ -130,9 +129,10 @@ class Game {
       this.levelChangeSound.play()
       this.levelChangeSound.pause()
     }
-    this.ctx.font = '30px luckiest Guy'
+    this.ctx.font = '30px Arial'
     this.ctx.fillStyle = "black"
-    this.ctx.fillText(`Level: ${this.level}`, 450, 20)
+    this.ctx.textAlign = 'center'
+    this.ctx.fillText(`Level: ${this.level}`, 480, 25)
   }
 
   stop() {
@@ -170,13 +170,20 @@ class Game {
   checkCollisions() {
     this.hunter1.boomerangs.forEach(boomerang => {
       this.birds.some(bird => {
-        const colX = boomerang.x < bird.x + bird.w && boomerang.x + boomerang.w > bird.x
-        const colY = boomerang.y < bird.y + bird.h && boomerang.h + boomerang.y > bird.y
-        if (colX && colY) {
+        var colXBird = boomerang.x < bird.x + bird.w && boomerang.x + boomerang.w > bird.x
+        var colYBird = boomerang.y < bird.y + bird.h && boomerang.h + boomerang.y > bird.y
+        if (colXBird && colYBird) {
           this.birds.splice(this.birds.indexOf(bird), 1);
-          //this.knife.splice(this.knives.indexOf(knife), 1);
           this.points++;
           this.killTheBirdSound.play();
+          this.knives.some(knife => {
+            let colXknives = boomerang.x < knife.x + knife.w && boomerang.x + boomerang.w > knife.x
+            let colYKnives = boomerang.y < knife.y + knife.h && boomerang.h + boomerang.y > knife.y
+            if (colXknives && colYKnives) {
+              this.knives.splice(this.knives.indexOf(knife), 1);
+              return true;
+            }
+          })
           return true;
         }
       })
@@ -186,12 +193,20 @@ class Game {
   checkCollisionsBirds2() {
     this.hunter1.boomerangs.forEach(boomerang => {
       this.birds2.some(bird2 => {
-        const colX = boomerang.x < bird2.x + bird2.w && boomerang.x + boomerang.w > bird2.x
-        const colY = boomerang.y < bird2.y + bird2.h && boomerang.h + boomerang.y > bird2.y
-        if (colX && colY) {
+        const colXBird2 = boomerang.x < bird2.x + bird2.w && boomerang.x + boomerang.w > bird2.x
+        const colYBird2 = boomerang.y < bird2.y + bird2.h && boomerang.h + boomerang.y > bird2.y
+        if (colXBird2 && colYBird2) {
           this.birds2.splice(this.birds2.indexOf(bird2), 1);
           this.points++;
           this.killTheBird2Sound.play()
+          this.knives.some(knife => {
+            let colXknives2 = boomerang.x < knife2.x + knife2.w && boomerang.x + boomerang.w > knife2.x
+            let colYKnives2 = boomerang.y < knife2.y + knife2.h && boomerang.h + boomerang.y > knife2.y
+            if (colXknives2 && colYKnives2) {
+              this.knives2.splice(this.knives2.indexOf(knife2), 1);
+              return true;
+            }
+          })
           return true;
         }
       })
@@ -256,7 +271,7 @@ class Game {
     this.img = new Image();
     this.img.src = 'assets/images/mainbackground.jpg'
     this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
-    this.ctx.font = "60px 'Roboto';";
+    this.ctx.font = "40px Arial";
     this.ctx.textAlign = "center";
     this.ctx.fillText(
       `GAME OVER
@@ -275,9 +290,8 @@ class Game {
       this.stop()
       this.img = new Image();
       this.img.src = 'assets/images/mainbackground.jpg'
-
       this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
-      this.ctx.font = "120px 'Roboto';";
+      this.ctx.font = "40px Arial";
       this.ctx.textAlign = "center";
       this.ctx.fillText(
         `YOU WIN!
@@ -290,22 +304,23 @@ class Game {
   }
 
   score() {
-    this.ctx.font = '30px Roboto'
+    this.ctx.font = '30px Arial'
     this.ctx.fillStyle = "black"
-    this.ctx.fillText(`Score: ${this.points}`, 20, 20)
+    this.ctx.textAlign = "left";
+    this.ctx.fillText(`Score: ${this.points}`, 20, 25)
   }
 
   showLifes() {
-    this.ctx.font = '30px Roboto'
+    this.ctx.font = '30px Arial'
     this.ctx.fillStyle = "black"
-    this.ctx.fillText(`Lives: ${this.lifes}`, 880, 20)
+    this.ctx.textAlign = "right";
+    this.ctx.fillText(`Lives: ${this.lifes}`, 980, 25)
   }
 
   initListeners() {
     document.onkeydown = (e) => {
       this.hunter1.onKeyDown(e.keyCode)
     }
-
     document.onkeyup = (e) => {
       this.hunter1.onKeyUp(e.keyCode)
     }
