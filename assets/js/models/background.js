@@ -13,10 +13,5 @@ class Background {
 
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
-  }
-
-  move() {
-    this.x += this.vx
-    this.y += this.vy
-  }
+  } 
 }
