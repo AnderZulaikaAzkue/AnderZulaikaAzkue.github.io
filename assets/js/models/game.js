@@ -115,7 +115,7 @@ class Game {
   }
 
   checkLevelChange() {
-    if (this.points < 3) {
+    if (this.points < 10) {
       this.level = 1
     } else {
       this.level = 2
@@ -123,7 +123,7 @@ class Game {
       //this.levelChangeSound.play()
       //this.levelChangeSound.pause()
     }
-    if (this.points > 6) {
+    if (this.points > 20) {
       this.level = 3
       this.levelChangeSound.loop = false
       //this.levelChangeSound.play()
