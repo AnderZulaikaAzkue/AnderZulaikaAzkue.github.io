@@ -120,14 +120,14 @@ class Game {
     } else {
       this.level = 2
       this.levelChangeSound.loop = false
-      this.levelChangeSound.play()
-      this.levelChangeSound.pause()
+      //this.levelChangeSound.play()
+      //this.levelChangeSound.pause()
     }
     if (this.points > 6) {
       this.level = 3
       this.levelChangeSound.loop = false
-      this.levelChangeSound.play()
-      this.levelChangeSound.pause()
+      //this.levelChangeSound.play()
+      //this.levelChangeSound.pause()
     }
     this.ctx.font = '30px Arial'
     this.ctx.fillStyle = "black"
