@@ -66,7 +66,7 @@ class Game {
     }, 1000)
 
     setInterval(() => {
-      if (this.points > 3) {
+      if (this.points > 10) {
         this.knives2.push(
           new Knife2(this.ctx, this.x, this.y)
         )
@@ -75,7 +75,7 @@ class Game {
     }, 1000)
 
     setInterval(() => {
-      if (this.points > 6) {
+      if (this.points > 20) {
         this.birdsDeath.push(new BirdsDeath(this.ctx, this.x, this.y))
       }
     }, 1000)
